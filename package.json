@@ -1,0 +1,63 @@
+{
+  "name": "@therockstorm/utils",
+  "version": "1.0.2",
+  "description": "Common utils",
+  "homepage": "https://github.com/therockstorm/utils",
+  "license": "MIT",
+  "author": {
+    "name": "Rocky Warren",
+    "url": "https://www.rockywarren.com"
+  },
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/therockstorm/utils"
+  },
+  "scripts": {
+    "build": "flow-remove-types src/ -d lib/",
+    "flow": "flow",
+    "format": "prettier --write './**/*.js'",
+    "lint": "standard --fix",
+    "prepublish": "npm run build",
+    "pretest": "npm run lint && npm run flow && npm run build",
+    "test": "mocha",
+    "watch": "npm test -- --watch"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "eslint-plugin-flowtype": "^2.43.0",
+    "flow-bin": "^0.65.0",
+    "flow-remove-types": "^1.2.3",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.1.0",
+    "mocha": "^5.0.0",
+    "prettier": "^1.7.0",
+    "sinon": "^4.3.0",
+    "standard": "^10.0.3"
+  },
+  "lint-staged": {
+    "*.js": [
+      "standard --fix && prettier --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "standard": {
+    "globals": [
+      "afterEach",
+      "beforeEach",
+      "describe",
+      "it"
+    ],
+    "parser": "babel-eslint",
+    "plugins": [
+      "flowtype"
+    ]
+  }
+}
