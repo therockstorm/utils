@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-const utils = require('../lib/index')
+const utils = require('../src/index')
 
 const sandbox = sinon.createSandbox()
 
@@ -53,7 +53,11 @@ describe('required', () => {
   it('throws if does not exists', () => {
     const name = 'myKey'
 
-    assert.throws(() => utils.required(undefined, name), Error, `${name} required`)
+    assert.throws(
+      () => utils.required(undefined, name),
+      Error,
+      `${name} required`
+    )
   })
 })
 
