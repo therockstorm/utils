@@ -15,7 +15,7 @@ npm install @therockstorm/utils --save
 * [`required`](#required)
 * [`envVar`](#envVar)
 
-## `log`
+### `log`
 
 Calls `console.log` with `[INFO]` prefix except in test environment
 
@@ -23,7 +23,7 @@ Calls `console.log` with `[INFO]` prefix except in test environment
 utils.log('My message');
 ```
 
-## `error`
+### `error`
 
 Calls `console.error` with `[ERROR]` prefix except in test environment
 
@@ -31,7 +31,7 @@ Calls `console.error` with `[ERROR]` prefix except in test environment
 utils.error('My message');
 ```
 
-## `required`
+### `required`
 
 Returns first argument or throws if undefined
 
@@ -39,7 +39,7 @@ Returns first argument or throws if undefined
 const value = utils.required(process.argv[1], 'myOption');
 ```
 
-## `envVar`
+### `envVar`
 
 Returns first argument in `process.env` or throws if undefined
 
@@ -56,3 +56,7 @@ nvm install && nvm use && npm install
 # Run tests, lint, and flow
 npm test
 ```
+
+## License
+
+MIT © [Rocky Warren](https://www.rockywarren.com)
