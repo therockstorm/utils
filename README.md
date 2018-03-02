@@ -1,6 +1,10 @@
 # Utils
 
-Common utils
+[![npm](https://img.shields.io/npm/v/@therockstorm/utils.svg)](https://www.npmjs.com/package/@therockstorm/utils)
+[![Build Status](https://travis-ci.org/therockstorm/utils.svg)](https://travis-ci.org/therockstorm/utils)
+[![license](https://img.shields.io/github/license/therockstorm/utils.svg)]()
+
+Common utility functions
 
 ## Installing
 
