@@ -1,7 +1,7 @@
 {
   "name": "@therockstorm/utils",
-  "version": "1.0.7",
-  "description": "Common utils",
+  "version": "0.0.0-development",
+  "description": "Common utility functions",
   "homepage": "https://github.com/therockstorm/utils#readme",
   "bugs": {
     "url": "https://github.com/therockstorm/utils/issues"
@@ -17,7 +17,7 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/therockstorm/utils.git"
+    "url": "https://github.com/therockstorm/utils.git"
   },
   "scripts": {
     "build": "flow-remove-types --pretty --quiet src --out-dir lib && flow gen-flow-files src --out-dir lib",
@@ -28,19 +28,24 @@
     "prepare": "npm run build",
     "pretest": "npm run format && npm run lint && npm run flow",
     "test": "mocha -r flow-remove-types/register",
-    "watch": "npm test -- --watch"
+    "watch": "npm test -- --watch",
+    "travis-deploy-once": "travis-deploy-once",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.2",
-    "eslint-plugin-flowtype": "^2.46.1",
-    "flow-bin": "^0.66.0",
+    "babel-eslint": "^8.2.3",
+    "cz-conventional-changelog": "^2.1.0",
+    "eslint-plugin-flowtype": "^2.46.3",
+    "flow-bin": "^0.71.0",
     "flow-remove-types": "^1.2.3",
     "husky": "^0.14.3",
-    "lint-staged": "^7.0.0",
-    "mocha": "^5.0.1",
-    "prettier": "^1.11.1",
-    "sinon": "^4.4.2",
-    "standard": "^11.0.0"
+    "lint-staged": "^7.0.5",
+    "mocha": "^5.1.1",
+    "prettier": "^1.12.1",
+    "semantic-release": "^15.1.8",
+    "sinon": "^5.0.1",
+    "standard": "^11.0.1",
+    "travis-deploy-once": "^5.0.0"
   },
   "lint-staged": {
     "*.js": [
@@ -64,5 +69,10 @@
     "plugins": [
       "flowtype"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
