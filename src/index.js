@@ -1,15 +1,14 @@
 // @flow
-const log = (
-  msg: string,
-  isError: boolean = false,
-  isTest: boolean = process.env.ENVIRONMENT === 'test'
-) => {
-  if (isTest) return
+const TEST_ENV = process.env.ENVIRONMENT === 'test'
 
-  isError ? console.error('[ERROR]', msg) : console.log('[INFO]', msg)
-}
+const l = (func: string => void, msg: string, isTest: boolean = TEST_ENV) =>
+  isTest ? undefined : func(msg)
 
-const error = (msg: string) => log(msg, true)
+const log = (msg: string) => l(console.log, msg)
+const debug = (msg: string) => l(console.debug, `[debug] ${msg}`)
+const info = (msg: string) => l(console.info, `[info] ${msg}`)
+const warn = (msg: string) => l(console.warn, `[warn] ${msg}`)
+const error = (msg: string) => l(console.error, `[error] ${msg}`)
 
 const required = (val: mixed, name: string): any => {
   if (val) return val
@@ -20,6 +19,9 @@ const envVar = (name: string): string => required(process.env[name], name)
 
 module.exports = {
   log,
+  debug,
+  info,
+  warn,
   error,
   envVar,
   required

@@ -2,44 +2,61 @@ const assert = require('assert')
 const sinon = require('sinon')
 const utils = require('../src/index')
 
+const MSG = 'my msg'
 const sandbox = sinon.createSandbox()
 
-describe('log and error', () => {
-  const MSG = 'log msg'
-  let logStub, errorStub
-
-  beforeEach(() => {
-    logStub = sandbox.stub(console, 'log')
-    errorStub = sandbox.stub(console, 'error')
-  })
-  afterEach(() => sandbox.restore())
-
+describe('log', () => {
   it('logs', () => {
+    const stub = sandbox.stub(console, 'log')
+
     utils.log(MSG)
 
-    assert(logStub.calledWith('[INFO]', MSG))
-    assert(!errorStub.called)
+    assert(stub.calledWith(MSG))
+    sandbox.restore()
   })
+})
 
-  it('log logs error', () => {
-    utils.log(MSG, true)
+describe('debug', () => {
+  it('logs', () => {
+    const stub = sandbox.stub(console, 'debug')
 
-    assert(!logStub.called)
-    assert(errorStub.calledWith('[ERROR]', MSG))
+    utils.debug(MSG)
+
+    assert(stub.calledWith(`[debug] ${MSG}`))
+    sandbox.restore()
   })
+})
 
-  it('error logs error', () => {
+describe('info', () => {
+  it('logs', () => {
+    const stub = sandbox.stub(console, 'info')
+
+    utils.info(MSG)
+
+    assert(stub.calledWith(`[info] ${MSG}`))
+    sandbox.restore()
+  })
+})
+
+describe('warn', () => {
+  it('logs', () => {
+    const stub = sandbox.stub(console, 'warn')
+
+    utils.warn(MSG)
+
+    assert(stub.calledWith(`[warn] ${MSG}`))
+    sandbox.restore()
+  })
+})
+
+describe('error', () => {
+  it('logs', () => {
+    const stub = sandbox.stub(console, 'error')
+
     utils.error(MSG)
 
-    assert(!logStub.called)
-    assert(errorStub.calledWith('[ERROR]', MSG))
-  })
-
-  it('does not log in test environment', () => {
-    utils.log(MSG, true, true)
-
-    assert(!logStub.called)
-    assert(!errorStub.called)
+    assert(stub.calledWith(`[error] ${MSG}`))
+    sandbox.restore()
   })
 })
 
