@@ -18,21 +18,48 @@ npm install @therockstorm/utils --save
 ## API Reference
 
 * [`log`](#log)
+* [`debug`](#debug)
+* [`info`](#info)
+* [`warn`](#warn)
 * [`error`](#error)
 * [`required`](#required)
 * [`envVar`](#envVar)
 
 ### `log`
 
-Calls `console.log` with `[INFO]` prefix except in test environment
+Calls `console.log` except in test environment
 
 ```js
 utils.log('My message');
 ```
 
+### `debug`
+
+Calls `console.debug` with `[debug]` prefix except in test environment
+
+```js
+utils.debug('My message');
+```
+
+### `info`
+
+Calls `console.info` with `[info]` prefix except in test environment
+
+```js
+utils.info('My message');
+```
+
+### `warn`
+
+Calls `console.warn` with `[warn]` prefix except in test environment
+
+```js
+utils.warn('My message');
+```
+
 ### `error`
 
-Calls `console.error` with `[ERROR]` prefix except in test environment
+Calls `console.error` with `[error]` prefix except in test environment
 
 ```js
 utils.error('My message');
