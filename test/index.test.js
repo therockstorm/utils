@@ -2,62 +2,48 @@ const assert = require('assert')
 const sinon = require('sinon')
 const utils = require('../src/index')
 
-const MSG = 'my msg'
 const sandbox = sinon.createSandbox()
 
-describe('log', () => {
-  it('logs', () => {
-    const stub = sandbox.stub(console, 'log')
+afterEach(() => sandbox.restore())
 
-    utils.log(MSG)
+describe('console', () => {
+  const ms = ['log', 'debug', 'info', 'warn', 'error']
 
-    assert(stub.calledWith(MSG))
-    sandbox.restore()
-  })
-})
+  const log = (x, ...args) => {
+    const captured = []
 
-describe('debug', () => {
-  it('logs', () => {
-    const stub = sandbox.stub(console, 'debug')
+    const capture = streams =>
+      streams.map(s => {
+        const old = s.write
+        s.write = str => captured.push(str.replace(/\n$/, ''))
+        return () => (s.write = old)
+      })
 
-    utils.debug(MSG)
+    const restore = capture([process.stdout, process.stderr])
+    ms.forEach(m => (args ? utils[m](x, ...args) : utils[m](x)))
+    restore.map(s => s())
 
-    assert(stub.calledWith(`[debug] ${MSG}`))
-    sandbox.restore()
-  })
-})
+    return captured
+  }
 
-describe('info', () => {
-  it('logs', () => {
-    const stub = sandbox.stub(console, 'info')
+  const expected = ex => [
+    ex,
+    `[debug] ${ex}`,
+    `[info] ${ex}`,
+    `[warn] ${ex}`,
+    `[error] ${ex}`
+  ]
 
-    utils.info(MSG)
+  it('logs string', () => assert.deepEqual(log('log'), expected('log')))
 
-    assert(stub.calledWith(`[info] ${MSG}`))
-    sandbox.restore()
-  })
-})
+  it('logs multiple strings', () =>
+    assert.deepEqual(log('log', 'me'), expected('log me')))
 
-describe('warn', () => {
-  it('logs', () => {
-    const stub = sandbox.stub(console, 'warn')
+  it('logs object', () =>
+    assert.deepEqual(log({ log: 'me' }), expected(`{ log: 'me' }`)))
 
-    utils.warn(MSG)
-
-    assert(stub.calledWith(`[warn] ${MSG}`))
-    sandbox.restore()
-  })
-})
-
-describe('error', () => {
-  it('logs', () => {
-    const stub = sandbox.stub(console, 'error')
-
-    utils.error(MSG)
-
-    assert(stub.calledWith(`[error] ${MSG}`))
-    sandbox.restore()
-  })
+  it('logs array', () =>
+    assert.deepEqual(log(['log', 'me']), expected(`[ 'log', 'me' ]`)))
 })
 
 describe('required', () => {

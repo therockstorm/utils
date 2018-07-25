@@ -1,14 +1,17 @@
 // @flow
 const TEST_ENV = process.env.ENVIRONMENT === 'test'
 
-const l = (func: string => void, msg: string, isTest: boolean = TEST_ENV) =>
-  isTest ? undefined : func(msg)
+const handler = prefix => (target, that, args) =>
+  TEST_ENV
+    ? undefined
+    : !args || !prefix
+      ? target(...args)
+      : target(`[${prefix}]`, args.shift(), ...args)
 
-const log = (msg: string) => l(console.log, msg)
-const debug = (msg: string) => l(console.debug, `[debug] ${msg}`)
-const info = (msg: string) => l(console.info, `[info] ${msg}`)
-const warn = (msg: string) => l(console.warn, `[warn] ${msg}`)
-const error = (msg: string) => l(console.error, `[error] ${msg}`)
+const pConsole = {}
+pConsole.log = new Proxy(console.log, { apply: handler() })
+const ms = ['debug', 'info', 'warn', 'error']
+ms.forEach(m => (pConsole[m] = new Proxy(console[m], { apply: handler(m) })))
 
 const required = (val: mixed, name: string): any => {
   if (val) return val
@@ -18,11 +21,11 @@ const required = (val: mixed, name: string): any => {
 const envVar = (name: string): string => required(process.env[name], name)
 
 module.exports = {
-  log,
-  debug,
-  info,
-  warn,
-  error,
+  log: pConsole.log,
+  debug: pConsole.debug,
+  info: pConsole.info,
+  warn: pConsole.warn,
+  error: pConsole.error,
   envVar,
   required
 }
