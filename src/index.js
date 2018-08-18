@@ -13,12 +13,26 @@ pConsole.log = new Proxy(console.log, { apply: handler() })
 const ms = ['debug', 'info', 'warn', 'error']
 ms.forEach(m => (pConsole[m] = new Proxy(console[m], { apply: handler(m) })))
 
-const required = (val: mixed, name: string): any => {
-  if (val) return val
-  throw new Error(`${name} required`)
+const thrw = err => {
+  if (err instanceof Error) throw err
+  throw new Error(err)
 }
 
+const required = (val: mixed, name: string): any =>
+  val || thrw(`${name} required`)
+
 const envVar = (name: string): string => required(process.env[name], name)
+
+const once = (fn, context) => {
+  let result
+  return () => {
+    if (fn) {
+      result = fn.apply(context || this, arguments)
+      fn = null
+    }
+    return result
+  }
+}
 
 module.exports = {
   log: pConsole.log,
@@ -27,5 +41,7 @@ module.exports = {
   warn: pConsole.warn,
   error: pConsole.error,
   envVar,
-  required
+  thrw,
+  required,
+  once
 }
