@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-const utils = require('../src/index')
+const utils = require('../src')
 
 const sandbox = sinon.createSandbox()
 

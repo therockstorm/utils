@@ -1,6 +1,6 @@
 {
   "name": "@therockstorm/utils",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "Common utility functions",
   "homepage": "https://github.com/therockstorm/utils#readme",
   "bugs": {
@@ -20,55 +20,33 @@
     "url": "https://github.com/therockstorm/utils.git"
   },
   "scripts": {
-    "build": "flow-remove-types --pretty --quiet src --out-dir lib && flow gen-flow-files src --out-dir lib",
+    "build": "rm -rf lib && tsc --outDir lib && cp src/index.d.ts lib",
     "precommit": "lint-staged",
-    "flow": "flow",
-    "format": "prettier --write '{,!(lib)/**/}*.js'",
-    "lint": "standard --fix",
+    "format": "prettier --write '{,!(lib)/**/}*.+(js|json|md|ts)'",
     "prepare": "npm run build",
-    "pretest": "npm run format && npm run lint && npm run flow",
-    "test": "mocha -r flow-remove-types/register",
+    "pretest": "npm run format",
+    "test": "mocha -r ts-node/register",
     "watch": "npm test -- --watch"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.6",
-    "cz-conventional-changelog": "^2.1.0",
-    "eslint-plugin-flowtype": "^2.50.0",
-    "flow-bin": "^0.77.0",
-    "flow-remove-types": "^1.2.3",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.9.2",
     "husky": "^0.14.3",
     "lint-staged": "^7.2.0",
     "mocha": "^5.2.0",
     "prettier": "^1.13.7",
     "sinon": "^6.1.4",
-    "standard": "^11.0.1"
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.1"
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,json,md,ts}": [
       "prettier --write",
-      "standard --fix",
       "git add"
     ]
   },
   "prettier": {
     "semi": false,
     "singleQuote": true
-  },
-  "standard": {
-    "globals": [
-      "afterEach",
-      "beforeEach",
-      "describe",
-      "it"
-    ],
-    "parser": "babel-eslint",
-    "plugins": [
-      "flowtype"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }

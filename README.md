@@ -16,20 +16,20 @@ npm install @therockstorm/utils --save
 
 ## API Reference
 
-* [`log`](#log)
-* [`debug`](#debug)
-* [`info`](#info)
-* [`warn`](#warn)
-* [`error`](#error)
-* [`required`](#required)
-* [`envVar`](#envVar)
+- [`log`](#log)
+- [`debug`](#debug)
+- [`info`](#info)
+- [`warn`](#warn)
+- [`error`](#error)
+- [`required`](#required)
+- [`envVar`](#envVar)
 
 ### `log`
 
 Calls `console.log` except in test environment
 
 ```js
-utils.log('My message');
+utils.log('My message')
 ```
 
 ### `debug`
@@ -37,7 +37,7 @@ utils.log('My message');
 Calls `console.debug` with `[debug]` prefix except in test environment
 
 ```js
-utils.debug('My message');
+utils.debug('My message')
 ```
 
 ### `info`
@@ -45,7 +45,7 @@ utils.debug('My message');
 Calls `console.info` with `[info]` prefix except in test environment
 
 ```js
-utils.info('My message');
+utils.info('My message')
 ```
 
 ### `warn`
@@ -53,7 +53,7 @@ utils.info('My message');
 Calls `console.warn` with `[warn]` prefix except in test environment
 
 ```js
-utils.warn('My message');
+utils.warn('My message')
 ```
 
 ### `error`
@@ -61,7 +61,7 @@ utils.warn('My message');
 Calls `console.error` with `[error]` prefix except in test environment
 
 ```js
-utils.error('My message');
+utils.error('My message')
 ```
 
 ### `required`
@@ -69,7 +69,7 @@ utils.error('My message');
 Returns first argument or throws if undefined
 
 ```js
-const value = utils.required(process.argv[1], 'myOption');
+const value = utils.required(process.argv[1], 'myOption')
 ```
 
 ### `envVar`
@@ -77,7 +77,7 @@ const value = utils.required(process.argv[1], 'myOption');
 Returns first argument in `process.env` or throws if undefined
 
 ```js
-const value = utils.envVar('MY_KEY');
+const value = utils.envVar('MY_KEY')
 ```
 
 ## Developing
@@ -86,7 +86,7 @@ const value = utils.envVar('MY_KEY');
 # Install dependencies
 nvm install && nvm use && npm install
 
-# Run tests, lint, and flow
+# Run tests
 npm test
 ```
 

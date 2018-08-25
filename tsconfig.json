@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "target": "es6",
+    "lib": ["esnext"],
+    "moduleResolution": "node"
+  },
+  "include": ["./src/**/*"]
+}
