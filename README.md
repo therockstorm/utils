@@ -16,68 +16,89 @@ npm install @therockstorm/utils --save
 
 ## API Reference
 
-* [`log`](#log)
-* [`debug`](#debug)
-* [`info`](#info)
-* [`warn`](#warn)
-* [`error`](#error)
-* [`required`](#required)
-* [`envVar`](#envVar)
+- [`log`](#log)
+- [`debug`](#debug)
+- [`info`](#info)
+- [`warn`](#warn)
+- [`error`](#error)
+- [`envVar`](#envvar)
+- [`once`](#once)
+- [`required`](#required)
+- [`thrw`](#thrw)
 
 ### `log`
 
-Calls `console.log` except in test environment
+Calls `console.log`
 
 ```js
-utils.log('My message');
+utils.log('My message')
 ```
 
 ### `debug`
 
-Calls `console.debug` with `[debug]` prefix except in test environment
+Calls `console.debug` with `[debug]` prefix
 
 ```js
-utils.debug('My message');
+utils.debug('My message')
 ```
 
 ### `info`
 
-Calls `console.info` with `[info]` prefix except in test environment
+Calls `console.info` with `[info]` prefix
 
 ```js
-utils.info('My message');
+utils.info('My message')
 ```
 
 ### `warn`
 
-Calls `console.warn` with `[warn]` prefix except in test environment
+Calls `console.warn` with `[warn]` prefix
 
 ```js
-utils.warn('My message');
+utils.warn('My message')
 ```
 
 ### `error`
 
-Calls `console.error` with `[error]` prefix except in test environment
+Calls `console.error` with `[error]` prefix
 
 ```js
-utils.error('My message');
+utils.error('My message')
 ```
 
-### `required`
+### `once`
 
-Returns first argument or throws if undefined
+Returns function that only executes once, no matter how many times it's called
 
 ```js
-const value = utils.required(process.argv[1], 'myOption');
+const onlyOnce = utils.once(() => console.log('hi'))
+
+onlyOnce() // 'hi'
+onlyOnce() // nothing
 ```
 
 ### `envVar`
 
-Returns first argument in `process.env` or throws if undefined
+Returns argument from `process.env` or throws if undefined
 
 ```js
-const value = utils.envVar('MY_KEY');
+const value = utils.envVar('MY_KEY')
+```
+
+### `required`
+
+Returns first argument or throws using second argument as error message if undefined
+
+```js
+const value = utils.required(process.argv[1], 'myOption')
+```
+
+### `thrw`
+
+Throws an exception, can be used in locations `throw` cannot
+
+```js
+myVal ? doSomething() : thrw('error')
 ```
 
 ## Developing
@@ -86,7 +107,7 @@ const value = utils.envVar('MY_KEY');
 # Install dependencies
 nvm install && nvm use && npm install
 
-# Run tests, lint, and flow
+# Run tests
 npm test
 ```
 
