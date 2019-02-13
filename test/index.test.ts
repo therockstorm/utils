@@ -1,50 +1,5 @@
-const assert = require('assert')
-const sinon = require('sinon')
+import assert from 'assert'
 const utils = require('../src')
-
-const sandbox = sinon.createSandbox()
-
-afterEach(() => sandbox.restore())
-
-describe('console', () => {
-  const ms = ['log', 'debug', 'info', 'warn', 'error']
-
-  const log = (x, ...args) => {
-    const captured = []
-
-    const capture = streams =>
-      streams.map(s => {
-        const old = s.write
-        s.write = str => captured.push(str.replace(/\n$/, ''))
-        return () => (s.write = old)
-      })
-
-    const restore = capture([process.stdout, process.stderr])
-    ms.forEach(m => (args ? utils[m](x, ...args) : utils[m](x)))
-    restore.map(s => s())
-
-    return captured
-  }
-
-  const expected = ex => [
-    ex,
-    `[debug] ${ex}`,
-    `[info] ${ex}`,
-    `[warn] ${ex}`,
-    `[error] ${ex}`
-  ]
-
-  it('logs string', () => assert.deepEqual(log('log'), expected('log')))
-
-  it('logs multiple strings', () =>
-    assert.deepEqual(log('log', 'me'), expected('log me')))
-
-  it('logs object', () =>
-    assert.deepEqual(log({ log: 'me' }), expected(`{ log: 'me' }`)))
-
-  it('logs array', () =>
-    assert.deepEqual(log(['log', 'me']), expected(`[ 'log', 'me' ]`)))
-})
 
 describe('required', () => {
   const KEY = 'MY_KEY'

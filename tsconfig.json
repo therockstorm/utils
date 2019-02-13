@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "noImplicitReturns": true,
+    "esModuleInterop": true,
+    "lib": ["esnext"],
+    "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "target": "es6",
-    "lib": ["esnext"],
-    "moduleResolution": "node"
+    "strict": true,
+    "target": "es2017"
   },
-  "include": ["./src/**/*"]
+  "include": ["src", "test"]
 }

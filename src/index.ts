@@ -1,25 +1,16 @@
-const handler = prefix => (target, _, args) =>
-  !args || !prefix
-    ? target(...args)
-    : target(`[${prefix}]`, args.shift(), ...args)
+const TEST_ENV = process.env.ENVIRONMENT === 'test'
 
-const pConsole = { log: {}, debug: {}, info: {}, warn: {}, error: {} }
-pConsole.log = new Proxy(console.log, { apply: handler('') })
-const ms = ['debug', 'info', 'warn', 'error']
-ms.forEach(m => (pConsole[m] = new Proxy(console[m], { apply: handler(m) })))
+const l = (fn: any, first: any, ...rest: any[]) => {
+  TEST_ENV ? null : first ? fn(first, ...rest) : fn(...rest)
+}
+
+const log = (...args: any[]): void => l(console.log, null, ...args)
+const debug = (...args: any[]): void => l(console.debug, '[debug]', ...args)
+const info = (...args: any[]): void => l(console.info, '[info]', ...args)
+const warn = (...args: any[]): void => l(console.warn, '[warn]', ...args)
+const error = (...args: any[]): void => l(console.error, '[error]', ...args)
 
 const envVar = (name: string): string => required(process.env[name], name)
-
-const once = (fn: any, context: any): any => {
-  let result
-  return () => {
-    if (fn) {
-      result = fn.apply(context || this, arguments)
-      fn = null
-    }
-    return result
-  }
-}
 
 const required = (val: any, name: string): any =>
   val || thrw(`${name} required`)
@@ -30,13 +21,12 @@ const thrw = (err: string | Error): never => {
 }
 
 module.exports = {
-  log: pConsole.log,
-  debug: pConsole.debug,
-  info: pConsole.info,
-  warn: pConsole.warn,
-  error: pConsole.error,
+  log,
+  debug,
+  info,
+  warn,
+  error,
   envVar,
-  once,
   required,
   thrw
 }

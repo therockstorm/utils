@@ -1,12 +1,10 @@
-# Utils
+# utils
 
 [![npm](https://img.shields.io/npm/v/@therockstorm/utils.svg)](https://www.npmjs.com/package/@therockstorm/utils)
 [![Build Status](https://travis-ci.org/therockstorm/utils.svg)](https://travis-ci.org/therockstorm/utils)
 [![license](https://img.shields.io/github/license/therockstorm/utils.svg)]()
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![Greenkeeper badge](https://badges.greenkeeper.io/therockstorm/utils.svg)](https://greenkeeper.io/)
 
-Common utility functions
+Tiny utility functions
 
 ## Installing
 
@@ -22,7 +20,6 @@ npm install @therockstorm/utils --save
 - [`warn`](#warn)
 - [`error`](#error)
 - [`envVar`](#envvar)
-- [`once`](#once)
 - [`required`](#required)
 - [`thrw`](#thrw)
 
@@ -64,17 +61,6 @@ Calls `console.error` with `[error]` prefix
 
 ```js
 utils.error('My message')
-```
-
-### `once`
-
-Returns function that only executes once, no matter how many times it's called
-
-```js
-const onlyOnce = utils.once(() => console.log('hi'))
-
-onlyOnce() // 'hi'
-onlyOnce() // nothing
 ```
 
 ### `envVar`
