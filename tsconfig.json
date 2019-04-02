@@ -2,13 +2,12 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "lib": ["esnext"],
-    "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": true,
-    "target": "es2017"
+    "target": "es2018"
   },
-  "include": ["src", "test"]
+  "include": ["src"]
 }
