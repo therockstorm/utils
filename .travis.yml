@@ -5,14 +5,11 @@ cache:
 notifications:
   email: false
 node_js:
+  - '11'
   - '10'
-  - '9'
   - '8'
 before_install:
   - '[[ $(node -v) =~ ^v9.*$ ]] || npm install -g npm@latest'
-  - npm install -g greenkeeper-lockfile@1
-before_script: greenkeeper-lockfile-update
-after_script: greenkeeper-lockfile-upload
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
