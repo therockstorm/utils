@@ -14,25 +14,25 @@
   "scripts": {
     "build": "pack build",
     "format": "prettier --write '{,!(pkg)/**/}*.+(js|json|md|ts)'",
-    "start": "tsc && node src/index.js",
     "pretest": "npm run format",
     "publish": "pack publish",
+    "start": "tsc && node src/index.js",
     "test": "mocha -r ts-node/register test/**/*.ts",
     "watch": "npm test -- --watch"
   },
   "devDependencies": {
-    "@pika/pack": "^0.3.7",
+    "@pika/pack": "^0.4.0",
     "@pika/plugin-build-node": "^0.4.0",
     "@pika/plugin-build-web": "^0.4.0",
     "@pika/plugin-ts-standard-pkg": "^0.4.0",
-    "@types/mocha": "^5.2.6",
-    "@types/node": "^12.0.2",
-    "husky": "^2.3.0",
-    "lint-staged": "^8.1.7",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.0.10",
+    "husky": "^3.0.0",
+    "lint-staged": "^9.0.0",
     "mocha": "^6.1.4",
-    "prettier": "^1.17.1",
-    "ts-node": "^8.1.0",
-    "typescript": "^3.4.5"
+    "prettier": "^1.18.2",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.2"
   },
   "@pika/pack": {
     "pipeline": [
