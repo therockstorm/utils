@@ -5,9 +5,9 @@ cache:
 notifications:
   email: false
 node_js:
-  - '11'
+  - '13'
+  - '12'
   - '10'
-  - '8'
 before_install:
   - '[[ $(node -v) =~ ^v9.*$ ]] || npm install -g npm@latest'
 branches:
