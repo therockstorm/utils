@@ -1,7 +1,7 @@
 {
   "name": "@therockstorm/utils",
   "description": "Tiny utility functions",
-  "version": "3.0.20",
+  "version": "3.0.21",
   "license": "MIT",
   "homepage": "https://github.com/therockstorm/utils#readme",
   "bugs": {
@@ -15,7 +15,7 @@
     "build": "pika build",
     "format": "prettier --write '{,!(pkg)/**/}*.+(js|json|md|ts)'",
     "pretest": "npm run format",
-    "pub": "pika publish",
+    "pub": "pika build && pika publish",
     "start": "tsc && node src/index.js",
     "test": "mocha -r ts-node/register test/**/*.ts",
     "version": "npm run build",
